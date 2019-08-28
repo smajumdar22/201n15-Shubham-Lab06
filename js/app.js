@@ -3,183 +3,230 @@
 var hoursInADay =['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm'
 ,'6pm','7pm','8pm'];
 
+
 function generateRandom(min,max){
-    min = Math.ceil(min);
-    max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
     
   };
-  generateRandom(1,100);
+var pikeEl = document.getElementById('pike');
+var seatacEl = document.getElementById('seatac');
+var seattlecenterEl = document.getElementById('seattlecenter');
+var capitolhillEl = document.getElementById('capitolhill');
+var alkiEl = document.getElementById('alki');
 
-var storeOneEl = document.getElementById('pike');
-var storeTwoEl = document.getElementById('seatac');
-var storeThreeEl = document.getElementById('seattlecenter');
-var storeFourEl = document.getElementById('capitolhill');
-var storeFiveEl = document.getElementById('alki');
-
-var storeOne = {
+var pike = {
   name: '1st and Pike',
   minCust: 23,
   maxCust: 65,
   avgSalesPerCust: 6.3,
-  storeOneArray:[],
+  cookiesSoldEachHourArr :[],
+  customersPerHourArr : [],
+  totalPerDay : 0,
 
-      calculateCookiesPerHourStoreOne : function(avgSalesPerCust,randCust){
-        var randCust;
-        var totalcookiesSoldEachHour;
-        for (var i=0;i<hoursInADay.length;i++){
-             randCust = generateRandom(minCust,maxCust);
-             totalcookiesSoldEachHour = (avgSalesPerCust)*randCust;
-             var string =`${hoursInADay[i]}:${totalcookiesSoldEachHour} cookies`;
-             storeOne.storeOneArray.push (totalcookiesSoldEachHour,string);
-             totalPerDay += totalcookiesSoldEachHour;
-             return(totalcookiesSoldEachHour,string)
+      calcCustomersEachHour : function(){
+          for (var i =0;i<hoursInADay.length;i++){
+              var customersEachHour = generateRandom(this.minCust,this.maxCust)
+              this.customersPerHourArr.push(customersEachHour)
+          }
+       
+      },
+      calcCookiesSoldEachHour : function(){
+          for(var i=0;i<hoursInADay.length;i++){
+              var cookiesSoldEachHour = Math.floor(this.customersPerHourArr[i] * this.avgSalesPerCust);
+            this.cookiesSoldEachHourArr.push(cookiesSoldEachHour);
+              this.totalPerDay += cookiesSoldEachHour;
 
-        }
-        storeOne.storeOneArray.push(`Total : ${totalPerDay} cookies`);
-        calculateCookiesPerHourStoreOne(6.3,generateRandom(23,65));
+          }
+      },
+
+      render : function(){
+          this.calcCustomersEachHour();
+          this.calcCookiesSoldEachHour();
+
+          var liEl = document.createElement('li');
+          liEl.textContent = this.name;
+          pikeEl.appendChild(liEl);
+    
+          for(var i=0;i<hoursInADay.length;i++){
+              var liEl = document.createElement('li');
+              liEl.textContent = `${hoursInADay[i]}: ${this.cookiesSoldEachHourArr[i]} cookies`;
+              pikeEl.appendChild(liEl)
+          }
       }
+
     }
-    
-        // make an li
-        var liElOne = document.createElement('li');
-    
-        // give it content - the name
-        liElOne.textContent = storeOne.storeOneArray;
-    
-        // stick it on the DOM - to the UL
-        storeOneEl.appendChild(liElOne);
+    pike.render();
     
 
 
-
-var storeTwo = {
+var seatac = {
   name: 'SeaTac Airport', 
   minCust: 3,
   maxCust: 24,
   avgSalesPerCust: 1.2,
-  storeTwoArray:[],
+  cookiesSoldEachHourArr :[],
+  customersPerHourArr : [],
+  totalPerDay : 0,
 
-      calculateCookiesPerHour : function(avgSalesPerCust,randCust){
-        var randCust;
-        var totalcookiesSoldEachHour;
-        for (var i=0;i<hoursInADay.length;i++){
-             randCust = generateRandom(minCust,maxCust);
-             totalcookiesSoldEachHour = (avgSalesPerCust)*randCust;
-             var string =`${hoursInADay[i]}:${totalcookiesSoldEachHour} cookies`;
-             storeTwo.storeTwoArray.push (string);
-             totalPerDay += totalcookiesSoldEachHour;
-             return(totalcookiesSoldEachHour,string)
+      calcCustomersEachHour : function(){
+          for (var i =0;i<hoursInADay.length;i++){
+              var customersEachHour = generateRandom(this.minCust,this.maxCust)
+              this.customersPerHourArr.push(customersEachHour)
+          }
+       
+      },
+      calcCookiesSoldEachHour : function(){
+          for(var i=0;i<hoursInADay.length;i++){
+              var cookiesSoldEachHour = Math.floor(this.customersPerHourArr[i] * this.avgSalesPerCust);
+            this.cookiesSoldEachHourArr.push(cookiesSoldEachHour);
+              this.totalPerDay += cookiesSoldEachHour;
 
-        }
-        storeTwo.storeTwoArray.push(`Total : ${totalPerDay} cookies`);
-        calculateCookiesPerHourStoreOne(1.2,generateRandom(3,24));
-      }
-}
+          }
+      },
 
-// make an li
-var liElTwo = document.createElement('li');
+      render : function(){
+          this.calcCustomersEachHour();
+          this.calcCookiesSoldEachHour();
+
+          var liEl = document.createElement('li');
+          liEl.textContent = this.name;
+          seatacEl.appendChild(liEl);
     
-// give it content - the name
-liElTwo.textContent = storeTwo.storeTwoArray;
+          for(var i=0;i<hoursInADay.length;i++){
+              var liEl = document.createElement('li');
+              liEl.textContent = `${hoursInADay[i]}: ${this.cookiesSoldEachHourArr[i]} cookies`;
+              seatacEl.appendChild(liEl)
+          }
+      }
 
-// stick it on the DOM - to the UL
-storeTwoEl.appendChild(liElTwo);
+    }
+    seatac.render();
 
-
-var storeThree = {
+var seattlecenter = {
     name: 'Seattle Center', 
     minCust: 11,
     maxCust: 38,
     avgSalesPerCust: 3.7,
-    storeThreeArray:[],
-    calculateCookiesPerHour : function(avgSalesPerCust,randCust){
-        var randCust;
-        var totalcookiesSoldEachHour;
-        for (var i=0;i<hoursInADay.length;i++){
-             randCust = generateRandom(minCust,maxCust);
-             totalcookiesSoldEachHour = (avgSalesPerCust)*randCust;
-             var string =`${hoursInADay[i]}:${totalcookiesSoldEachHour} cookies`;
-             storeThree.storeThreeArray.push (string);
-             totalPerDay += totalcookiesSoldEachHour;
-             return(totalcookiesSoldEachHour,string)
+    cookiesSoldEachHourArr :[],
+  customersPerHourArr : [],
+  totalPerDay : 0,
 
-        }
-        storeThree.storeThreeArray.push(`Total : ${totalPerDay} cookies`);
-        calculateCookiesPerHourStoreOne(3.7,generateRandom(11,38));
-      }
-}
+      calcCustomersEachHour : function(){
+          for (var i =0;i<hoursInADay.length;i++){
+              var customersEachHour = generateRandom(this.minCust,this.maxCust)
+              this.customersPerHourArr.push(customersEachHour)
+          }
+       
+      },
+      calcCookiesSoldEachHour : function(){
+          for(var i=0;i<hoursInADay.length;i++){
+              var cookiesSoldEachHour = Math.floor(this.customersPerHourArr[i] * this.avgSalesPerCust);
+            this.cookiesSoldEachHourArr.push(cookiesSoldEachHour);
+              this.totalPerDay += cookiesSoldEachHour;
 
-// make an li
-var liElThree = document.createElement('li');
+          }
+      },
+
+      render : function(){
+          this.calcCustomersEachHour();
+          this.calcCookiesSoldEachHour();
+
+          var liEl = document.createElement('li');
+          liEl.textContent = this.name;
+          seattlecenterEl.appendChild(liEl);
     
-// give it content - the name
-liElThree.textContent = storeThree.storeThreeArray;
+          for(var i=0;i<hoursInADay.length;i++){
+              var liEl = document.createElement('li');
+              liEl.textContent = `${hoursInADay[i]}: ${this.cookiesSoldEachHourArr[i]} cookies`;
+              seattlecenterEl.appendChild(liEl)
+          }
+      }
 
-// stick it on the DOM - to the UL
-storeThreeEl.appendChild(liElThree);
+    }
+    seattlecenter.render();
 
-var storeFour = {
+var capitolhill = {
     name: 'Capitol Hill', 
     minCust: 20,
     maxCust: 38,
     avgSalesPerCust: 2.3,
-    storeFourArray:[],
-    calculateCookiesPerHour : function(avgSalesPerCust,randCust){
-        var randCust;
-        var totalcookiesSoldEachHour;
-        for (var i=0;i<hoursInADay.length;i++){
-             randCust = generateRandom(minCust,maxCust);
-             totalcookiesSoldEachHour = (avgSalesPerCust)*randCust;
-             var string =`${hoursInADay[i]}:${totalcookiesSoldEachHour} cookies`;
-             storeFour.storeFourArray.push (string);
-             totalPerDay += totalcookiesSoldEachHour;
-             return(totalcookiesSoldEachHour,string)
+    cookiesSoldEachHourArr :[],
+  customersPerHourArr : [],
+  totalPerDay : 0,
 
-        }
-        storeFour.storeFourArray.push(`Total : ${totalPerDay} cookies`);
-        calculateCookiesPerHourStoreOne(2.3,generateRandom(20,38));
-      }
-}
+      calcCustomersEachHour : function(){
+          for (var i =0;i<hoursInADay.length;i++){
+              var customersEachHour = generateRandom(this.minCust,this.maxCust)
+              this.customersPerHourArr.push(customersEachHour)
+          }
+       
+      },
+      calcCookiesSoldEachHour : function(){
+          for(var i=0;i<hoursInADay.length;i++){
+              var cookiesSoldEachHour = Math.floor(this.customersPerHourArr[i] * this.avgSalesPerCust);
+            this.cookiesSoldEachHourArr.push(cookiesSoldEachHour);
+              this.totalPerDay += cookiesSoldEachHour;
 
-// make an li
-var liElFour = document.createElement('li');
+          }
+      },
+
+      render : function(){
+          this.calcCustomersEachHour();
+          this.calcCookiesSoldEachHour();
+
+          var liEl = document.createElement('li');
+          liEl.textContent = this.name;
+          capitolhillEl.appendChild(liEl);
     
-// give it content - the name
-liElFour.textContent = storeFour.storeFourArray;
+          for(var i=0;i<hoursInADay.length;i++){
+              var liEl = document.createElement('li');
+              liEl.textContent = `${hoursInADay[i]}: ${this.cookiesSoldEachHourArr[i]} cookies`;
+              capitolhillEl.appendChild(liEl)
+          }
+      }
 
-// stick it on the DOM - to the UL
-storeFourEl.appendChild(liElFour);
+    }
+    capitolhill.render();
 
-var storeFive = {
+var alki= {
     name: 'Alki', 
     minCust: 2,
     maxCust: 16,
     avgSalesPerCust: 4.6,
-    storeFiveArray:[],
-    calculateCookiesPerHour : function(avgSalesPerCust,randCust){
-        var randCust;
-        var totalcookiesSoldEachHour;
-        for (var i=0;i<hoursInADay.length;i++){
-             randCust = generateRandom(minCust,maxCust);
-             totalcookiesSoldEachHour = (avgSalesPerCust)*randCust;
-             var string =`${hoursInADay[i]}:${totalcookiesSoldEachHour} cookies`;
-             storeFive.storeFiveArray.push (string);
-             totalPerDay += totalcookiesSoldEachHour;
-             return(totalcookiesSoldEachHour,string)
+    cookiesSoldEachHourArr :[],
+  customersPerHourArr : [],
+  totalPerDay : 0,
 
-        }
-        storeFive.storeFiveArray.push(`Total : ${totalPerDay} cookies`);
-        calculateCookiesPerHourStoreOne(4.6,generateRandom(2,16));
-      }
-}
+      calcCustomersEachHour : function(){
+          for (var i =0;i<hoursInADay.length;i++){
+              var customersEachHour = generateRandom(this.minCust,this.maxCust)
+              this.customersPerHourArr.push(customersEachHour)
+          }
+       
+      },
+      calcCookiesSoldEachHour : function(){
+          for(var i=0;i<hoursInADay.length;i++){
+              var cookiesSoldEachHour = Math.floor(this.customersPerHourArr[i] * this.avgSalesPerCust);
+            this.cookiesSoldEachHourArr.push(cookiesSoldEachHour);
+              this.totalPerDay += cookiesSoldEachHour;
 
-// make an li
-var liElFive = document.createElement('li');
+          }
+      },
+
+      render : function(){
+          this.calcCustomersEachHour();
+          this.calcCookiesSoldEachHour();
+
+          var liEl = document.createElement('li');
+          liEl.textContent = this.name;
+          alkiEl.appendChild(liEl);
     
-// give it content - the name
-liElFive.textContent = storeFive.storeFiveArray;
+          for(var i=0;i<hoursInADay.length;i++){
+              var liEl = document.createElement('li');
+              liEl.textContent = `${hoursInADay[i]}: ${this.cookiesSoldEachHourArr[i]} cookies`;
+              alkiEl.appendChild(liEl)
+          }
+      }
 
-// stick it on the DOM - to the UL
-storeFiveEl.appendChild(liElFive);
-
+    }
+    alki.render();
