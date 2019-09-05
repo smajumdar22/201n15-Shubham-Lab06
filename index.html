@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Table Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  <title>Salmon Cookies</title>
 </head>
 <body>
-  <h1>Salmon Store</h1>
+    <form id="addLocation">
+        <fieldset>
+          <legend>Add a Location</legend>
 
+          <label for='name'>Location Name</label>
+          <input type='text' name='name' required>
 
+          <label for='min'>Minimum Customers Each Hour</label>
+          <input type='number' name='min' required>
+
+          <label for='max'>Maximum Customers Each Hour</label>
+          <input type='number' name='max' required>
+
+          <label for='averageCookieSale'>Average Cookies Sold Per Person</label>
+          <input type='text' name='averageCookieSale' required>
+
+          <button>Submit</button>
+        </fieldset>
+      </form>
   <table>
-    <tbody>
+    <tbody id='table'>
 
-  </tbody>
+    </tbody>
   </table>
-
-  <h2>JS Table</h2>
-  <table>
-    <tbody id="table"></tbody>
-  </table>
-  
   <script src="js/app.js"></script>
 </body>
 </html>
