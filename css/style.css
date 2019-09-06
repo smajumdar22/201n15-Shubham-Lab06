@@ -1,0 +1,46 @@
+body{
+    background-color: bisque;
+}
+#storename{
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#salmon{
+    float:left;
+    width: 500px;
+    float: inherit;
+
+}
+#aboutus{
+    float: right;
+    font-style: italic;
+    padding: 10px;
+    text-align: center;
+}
+#merchandisewesell{
+    text-align: left;
+    font-size: 20px;
+    padding-top: 60px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+#salmonshirt{
+    width: 200px;
+}
+#cutter{
+    width: 200px;
+}
+#frostedcookie{
+    width: 200px;
+}
+#imgfamily{
+    width: 300px;
+}
+#imgchinook{
+    width: 170px;
+}
+#imgfish{
+    width: 450px;
+}
